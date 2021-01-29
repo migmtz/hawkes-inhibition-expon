@@ -18,7 +18,7 @@ from hawkes_process import exp_thinning_hawkes
 # Fix the example's random seed.
 np.random.seed(0)
 # Create a process with given parameters and maximal number of jumps.
-hawkes = exp_thinning_hawkes(lambda_0=1.2, alpha=-0.4, beta=0.8, max_jumps=15)
+hawkes = exp_thinning_hawkes(lambda_0=1.05, alpha=-0.7, beta=0.8, max_jumps=15)
 hawkes.simulate()
 # Plotting function of intensity and step functions.
 hawkes.plot_intensity()
@@ -39,4 +39,4 @@ This code was implemented using Python 3.8.5 and needs Numpy, Matplotlib and Sci
 ## References
 
 <a id="1">[1]</a>
-R. Lemonnier, N. Vayatis, Nonparametric markovian learning of triggering kernels for mutually exciting and mutuallyinhibiting multivariate hawkes processes, in: Machine Learning and Knowledge Discovery in Databases, Springer BerlinHeidelberg, 2014, p. 161–176
+R. Lemonnier, N. Vayatis, Nonparametric markovian learning of triggering kernels for mutually exciting and mutually inhibiting multivariate hawkes processes, in: Machine Learning and Knowledge Discovery in Databases, Springer Berlin Heidelberg, 2014, p. 161–176
