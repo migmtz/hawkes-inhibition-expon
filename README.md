@@ -35,6 +35,13 @@ This example must yield the following plot:
 
 This code was implemented using Python 3.8.5 and needs Numpy, Matplotlib and Scipy.
 
+## Installation
+
+Copy both files in the current directory.
+
+## Author
+
+Miguel Alejandro Martinez Herrera
 
 ## References
 
