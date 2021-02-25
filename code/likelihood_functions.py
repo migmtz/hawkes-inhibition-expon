@@ -4,7 +4,7 @@ import numpy as np
 
 # Functions for exponential estimation of loglikelihood.
 
-def loglikelihood(theta, tList, penalized=False, C=1):
+def loglikelihood(theta, tList):
     """
     Exact computation of the loglikelihood for an exponential Hawkes process for either self-exciting or self-regulating cases. 
     Estimation for a single realization.
@@ -15,10 +15,6 @@ def loglikelihood(theta, tList, penalized=False, C=1):
         Tuple containing the parameters to use for estimation.
     tList : list of float
         List containing all the lists of data (event times).
-    penalized : bool
-        Whether to add an L2-penalization. Default is False.
-    C : float
-        Penalization factor, only used if penalized parameter is True. Default is 1.
 
     Returns
     -------
@@ -63,14 +59,11 @@ def loglikelihood(theta, tList, penalized=False, C=1):
 
             likelihood += np.log(lambda_avant) - compensator_k
 
-        if penalized:
-            likelihood -= C * (lambda0 ** 2 + alpha ** 2 + beta ** 2)
-
         # We return the opposite of the likelihood in order to use minimization packages.
         return -likelihood
 
 
-def likelihood_approximated(theta, tList, penalized=False, C=1):
+def likelihood_approximated(theta, tList):
     """
     Approximation method for the loglikelihood, proposed by Lemonnier. 
     Estimation for a single realization.
@@ -81,10 +74,6 @@ def likelihood_approximated(theta, tList, penalized=False, C=1):
         Tuple containing the parameters to use for estimation.
     tList : list of float
         List containing all the lists of data (event times).
-    penalized : bool
-        Whether to add an L2-penalization. Default is False.
-    C : float
-        Penalization factor, only used if penalized parameter is True. Default is 1.
 
     Returns
     -------
@@ -130,9 +119,6 @@ def likelihood_approximated(theta, tList, penalized=False, C=1):
 
             tLast = tCurrent
 
-        if penalized:
-            likelihood -= C * (lambda0 ** 2 + alpha ** 2 + beta ** 2)
-
         # We return the opposite of the likelihood in order to use minimization packages.
         return -likelihood
 
@@ -164,12 +150,15 @@ def batch_likelihood(theta, nList, exact=True, penalized=False, C=1):
     batchlikelihood = 0
 
     if exact:
-        func = lambda x, y: loglikelihood(x, y, penalized=penalized, C=C)
+        func = lambda x, y: loglikelihood(x, y)
     else:
-        func = lambda x, y: likelihood_approximated(x, y, penalized=penalized, C=C)
+        func = lambda x, y: likelihood_approximated(x, y)
 
     for tList in nList:
         batchlikelihood += func(theta, tList)
     batchlikelihood /= len(nList)
+    
+    if penalized:
+        batchlikelihood += C*(theta[0]**2 + theta[1]**2 + theta[2]**2)
 
     return batchlikelihood
