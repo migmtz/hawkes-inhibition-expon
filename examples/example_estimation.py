@@ -4,7 +4,7 @@ from code.metric_estimator_classes import loglikelihood_estimator
 
 if __name__ == "__main__":
     
-    #Set seed
+    # Set seed
     np.random.seed(7)
     
     lambda_0 = 1.2
