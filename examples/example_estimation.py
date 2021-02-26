@@ -1,6 +1,6 @@
 import numpy as np
 from code.hawkes_process import exp_thinning_hawkes
-from code.metric_estimator_classes import loglikelihood_estimator
+from code.estimator_class import loglikelihood_estimator
 
 if __name__ == "__main__":
     
