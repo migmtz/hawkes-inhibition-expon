@@ -1,24 +1,24 @@
 import numpy as np
 from scipy import stats
 from scipy.optimize import minimize
-from hawkes_process import exp_thinning_hawkes
-from likelihood_functions import *
+from code.hawkes_process import exp_thinning_hawkes
+from code.likelihood_functions import *
 
 
 class loglikelihood_estimator(object):
-        """
-        Estimator class for Exponential Hawkes process obtained through minimizaton of a loss.
-        Contemplated losses are functions from likelihood_functions, either loglikelihood or likelihood_approximated.
+    """
+    Estimator class for Exponential Hawkes process obtained through minimizaton of a loss.
+    Contemplated losses are functions from likelihood_functions, either loglikelihood or likelihood_approximated.
 
-        Attributes
-        ----------
-        estimator : array
-            Array containing estimated parameters.
-        estimated_loss : float
-            Value of loss at estimated parameters.
-        model : object "exp_thinning_hawkes"
-            Class containing the estimated parameters, timestamps and corresponding intensities. Exists only if return_model is set to True.
-        """
+    Attributes
+    ----------
+    estimator : array
+        Array containing estimated parameters.
+    estimated_loss : float
+        Value of loss at estimated parameters.
+    model : object "exp_thinning_hawkes"
+        Class containing the estimated parameters, timestamps and corresponding intensities. Exists only if return_model is set to True.
+    """
     def __init__(self, loss=loglikelihood, solver="nelder-mead", simplex=True,penalty=False, C=1.0, return_model=False):
         """
         Parameters
