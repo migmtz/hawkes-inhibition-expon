@@ -10,6 +10,8 @@ We include two examples of application, one for simple plotting with the ```exp_
 
 As a remainder for the parameters of the function, the intensity function considered is:
 
+![equation](https://latex.codecogs.com/png.latex?%5Clambda%28t%29%20%3D%20%5Clambda_0%20&plus;%20%5Cint_%7B-%5Cinfty%7D%5E%7Bt%7D%7B%5Calpha%20e%5E%7B-%5Cbeta%20t%7D%7D)
+
 ```py
 import numpy as np
 from matplotlib import pyplot as plt
