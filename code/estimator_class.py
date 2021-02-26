@@ -6,7 +6,38 @@ from likelihood_functions import *
 
 
 class loglikelihood_estimator(object):
+        """
+        Estimator class for Exponential Hawkes process obtained through minimizaton of a loss.
+        Contemplated losses are functions from likelihood_functions, either loglikelihood or likelihood_approximated.
+
+        Attributes
+        ----------
+        estimator : array
+            Array containing estimated parameters.
+        estimated_loss : float
+            Value of loss at estimated parameters.
+        model : object "exp_thinning_hawkes"
+            Class containing the estimated parameters, timestamps and corresponding intensities. Exists only if return_model is set to True.
+        """
     def __init__(self, loss=loglikelihood, solver="nelder-mead", simplex=True,penalty=False, C=1.0, return_model=False):
+        """
+        Parameters
+        ----------
+        loss : {loglikelihood, likelihood_approximated}
+            Function to minimize. Default is loglikelihood.
+        solver : {"nelder-mead"}
+            Solver used in function minimize from scipy.optimize. 
+            Only contemplated case is "nelder-mead" which allows to obtain the better results along with the simplex initialization
+        simplex : bool
+            Whether if initialize the solver with a simplex. Default is True.
+        penalty : bool
+            Whether to add an L2-penalty. Default is False.
+        C : float
+            Penalty constant. Default is 1.0.
+        return_model : bool
+            Whether to create an object "exp_thinning_hawkes" with obtained estimation. 
+            The class has its corresponding intensity function.
+        """
         if penalty:
             self.loss = lambda theta, timestamps: loss(theta, timestamps) + C*(theta[0]**2 + theta[1]**2 + theta[2]**2)
         else:
@@ -19,6 +50,12 @@ class loglikelihood_estimator(object):
         self.return_model = return_model
 
     def fit(self, timestamps):
+        """
+        Parameters
+        ----------
+        timestamps : list of float
+            Ordered list containing event times.
+        """
         if self.simplex:
             x_simplex = []
 
