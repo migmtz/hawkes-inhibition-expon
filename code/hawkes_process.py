@@ -148,25 +148,24 @@ class exp_thinning_hawkes(object):
                 else:
                     return "ax must be an instance of an axes"
 
-            self.timestamps += [self.max_time]
+            self.timestamps.append(self.max_time)
 
             times = np.array([self.timestamps[0], self.timestamps[1]])
             intensities = np.array([self.lambda_0, self.lambda_0])
-
             step = 0.01
             for i, lambda_k in enumerate(self.intensity_jumps):
                 if i != 0:
                     T_k = self.timestamps[i]
-                    nb_step = np.minimum(100, np.floor((self.timestamps[i + 1] - T_k) / step))
+                    nb_step = np.maximum(100, np.floor((self.timestamps[i + 1] - T_k) / step))
                     aux_times = np.linspace(T_k, self.timestamps[i + 1], int(nb_step))
                     times = np.append(times, aux_times)
                     intensities = np.append(intensities, self.lambda_0 + (lambda_k - self.lambda_0) * np.exp(
                         -self.beta * (aux_times - T_k)))
 
             ax1.plot([0, self.max_time], [0, 0], c='k', alpha=0.5)
-            ax1.plot(times, intensities, label="Underlying intensity")
             if self.alpha < 0:
-                ax1.plot(times, np.maximum(intensities, 0), label="Conditional intensity", c='r')
+                ax1.plot(times, intensities, label="Underlying intensity", c="#1f77b4")
+            ax1.plot(times, np.maximum(intensities, 0), label="Conditional intensity", c='r')
             ax1.legend()
             ax1.grid()
             if plot_N:
