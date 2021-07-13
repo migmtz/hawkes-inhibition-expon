@@ -72,7 +72,7 @@ class loglikelihood_estimator(object):
             Ordered list containing event times.
         """
 
-        self.res = self.estimator.fit(timestamps)
+        self.res = self._estimator.fit(timestamps)
 
         self.estimator = self.res.x
         self.estimated_loss = self.res.fun
