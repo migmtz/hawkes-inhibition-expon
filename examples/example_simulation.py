@@ -16,6 +16,6 @@ if __name__ == "__main__":
     hawkes.simulate()
     
     # Plotting function of intensity and step functions.
-    hawkes.plot_intensity() #blablabla
+    hawkes.plot_intensity()
 
     plt.show()
