@@ -8,7 +8,7 @@ It includes a class to simulate an univariate Hawkes process and functions to co
 
 We include two examples of application, one for simple plotting with the ```exp_thinning_hawkes``` class, shown below, and another one implementing the algorithm of estimation with the ```estimator_class```.
 
-```python:examples/example_simulation.py
+```python:./examples/example_simulation.py
 
 ```
 
