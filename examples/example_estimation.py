@@ -16,9 +16,9 @@ if __name__ == "__main__":
     hawkes.simulate()
     tList = hawkes.timestamps
     
-    # Estimate using the estimator class and the real loglikelihood
+    # Estimate using the estimator class, the L-BFGS-B algorithm and the real loglikelihood
     model = loglikelihood_estimator()
     model.fit(tList)
     
-    print("Estimated parameters are:", model.estimator)         # Estimated parameters are: [ 1.49350942 -0.35850036  0.43912157]
-    print("With a loglikelihood of:", -model.estimated_loss)    # With a loglikelihood of: -112.56222084702222  
+    print("Estimated parameters are:", model.estimator)         # Estimated parameters are: [ 1.49351268 -0.35849889  0.43911736]
+    print("With a loglikelihood of:", -model.estimated_loss)    # With a loglikelihood of: -112.56222084709412
