@@ -106,7 +106,7 @@ class exp_thinning_hawkes(object):
             upper_intensity = max(self.lambda_0,
                                   self.lambda_0 + self.aux * np.exp(-self.beta * (self.t - self.timestamps[-1])))
 
-            self.t = np.random.exponential(1 / upper_intensity)
+            self.t += np.random.exponential(1 / upper_intensity)
             candidate_intensity = self.lambda_0 + self.aux * np.exp(-self.beta * (self.t - self.timestamps[-1]))
 
             flag = self.t < self.max_time
