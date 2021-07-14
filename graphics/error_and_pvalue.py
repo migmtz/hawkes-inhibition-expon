@@ -10,7 +10,7 @@ from scipy.stats import kstest
 
 #########
 ## Uncomment if numba is available. This package allows to significantly accelerate the estimations.
-from numba import njit
+# from numba import njit
 
 #########
 ## This script allows to estimate the average estimators and average p-values as they appear in our paper.
