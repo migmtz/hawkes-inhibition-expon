@@ -44,7 +44,7 @@ For graphics/boxplots_errors.py, pickle is necessary though this is not at all r
 
 ## Installation
 
-Copy both files in the current directory.
+Copy all files in the current working directory.
 
 ## Author
 
