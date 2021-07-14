@@ -6,7 +6,7 @@ from scipy.stats import kstest
 
 #########
 ## This allows to save our parameters in the SavedBoxplots files used in boxplots_errors.py.
-import pickle
+# import pickle
 
 #########
 ## Uncomment if numba is available. This package allows to significantly accelerate the estimations.
@@ -90,7 +90,6 @@ if __name__ == "__main__":
             box_real[iter, :] = exact_error
 
             ## Approximated estimation
-
             model_approx = loglikelihood_estimator(loss=approx_loss, return_model=True)
             np.random.seed(7 * iter)
             model_approx.fit(tList)
@@ -112,7 +111,7 @@ if __name__ == "__main__":
         print("")
 
         ## Uncomment to create the SavedBoxplots files through pickle.
-        toSave = [lambda_0, alpha, beta, max_jumps, iterations, box_approx, box_real, proportion]
-
-        with open('SavedBoxplots/SavedBoxplots' + str(t+1), 'wb') as f:
-            pickle.dump(toSave, f)
+        # toSave = [lambda_0, alpha, beta, max_jumps, iterations, box_approx, box_real, proportion]
+        #
+        # with open('SavedBoxplots/SavedBoxplots' + str(t+1), 'wb') as f:
+        #     pickle.dump(toSave, f)
