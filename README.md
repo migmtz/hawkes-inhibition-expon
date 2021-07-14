@@ -40,6 +40,8 @@ This example must yield the following plot:
 
 This code was implemented using Python 3.8.5 and needs Numpy, Matplotlib and Scipy.
 
+For graphics/boxplots_errors.py, pickle is necessary though this is not at all required to use all functions and classes implemented in this repository.
+
 ## Installation
 
 Copy both files in the current directory.
