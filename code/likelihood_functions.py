@@ -65,9 +65,9 @@ def loglikelihood(theta, tList):
 
 def likelihood_approximated(theta, tList):
     """
-    Approximation method for the loglikelihood, proposed by Lemonnier. 
+    Approximation method for the loglikelihood, proposed by Lemonnier.
     Estimation for a single realization.
-    
+
     Parameters
     ----------
     theta : tuple of float
@@ -78,7 +78,7 @@ def likelihood_approximated(theta, tList):
     Returns
     -------
     likelihood : float
-        Value of likelihood, either for 1 realization or for a batch. 
+        Value of likelihood, either for 1 realization or for a batch.
         The value returned is the opposite of the mathematical likelihood in order to use minimization packages.
     """
     lambda0, alpha, beta = theta
@@ -92,32 +92,33 @@ def likelihood_approximated(theta, tList):
         aux = np.log(lambda0)  # Value that will be often used
 
         # Set initial values and first step of iteration
-        A_k = 0
+        A_k_minus = 0
         Lambda_k = 0
-        likelihood = aux - lambda0 * tList[-1]
-        tLast = tList[0]
-        tUlt = tList[-1]
+        # likelihood = - lambda0*tList[0] + np.log(A_k_minus + lambda0)
+        likelihood = - lambda0*tList[-1] + np.log(A_k_minus + lambda0)
+        tLast = tList[1]
 
         # Iteration
-        for k in range(1, len(tList)):
+        for k in range(2, len(tList)):
 
             # Update A(k)
-            tCurrent = tList[k]
-            tau_k = tCurrent - tLast
-            A_k = (A_k + alpha) * np.exp(-beta * tau_k)
-            if A_k + lambda0 <= 0:
-                return 1e5
+            tNext = tList[k]
+            tau_k = tNext - tLast
+            A_k = (A_k_minus + alpha)
 
             # Integral
-            Lambda_k = (alpha / beta) * (1 - np.exp(-beta * (tUlt - tCurrent)))
+            Lambda_k = (A_k / beta) * (1 - np.exp(-beta * tau_k))# + lambda0*tau_k
 
             # Update likelihood
 
-            likelihood += np.log(lambda0 + A_k) - Lambda_k
+            A_k_minus = A_k*np.exp(-beta * tau_k)
+            if A_k_minus + lambda0 <= 0:
+                return 1e5
+            likelihood = likelihood - Lambda_k + np.log(lambda0 + A_k_minus)
 
             # Update B(k) and tLast
 
-            tLast = tCurrent
+            tLast = tNext
 
         # We return the opposite of the likelihood in order to use minimization packages.
         return -likelihood

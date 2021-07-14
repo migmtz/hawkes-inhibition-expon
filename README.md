@@ -18,12 +18,12 @@ if __name__ == "__main__":
     # Set seed
     np.random.seed(0)
 
-    lambda_0 = 1.2
-    alpha = -0.4
-    beta = 0.9
+    lambda_0 = 1.05
+    alpha = -0.7
+    beta = 0.8
     
     # Create a process with given parameters and maximal number of jumps.
-    hawkes = exp_thinning_hawkes(lambda_0=1.05, alpha=-0.7, beta=0.8, max_jumps=15)
+    hawkes = exp_thinning_hawkes(lambda_0=lambda_0, alpha=alpha, beta=beta, max_jumps=15)
     hawkes.simulate()
     
     # Plotting function of intensity and step functions.
@@ -32,7 +32,6 @@ if __name__ == "__main__":
     plt.show()
 
 ```
-
 This example must yield the following plot:
 
 <img src="./examples/plot_simulation.png" width="500">
@@ -41,9 +40,11 @@ This example must yield the following plot:
 
 This code was implemented using Python 3.8.5 and needs Numpy, Matplotlib and Scipy.
 
+For graphics/boxplots_errors.py, pickle is necessary though this is not at all required to use all functions and classes implemented in this repository.
+
 ## Installation
 
-Copy both files in the current directory.
+Copy all files in the current working directory.
 
 ## Author
 
