@@ -1,6 +1,6 @@
 # MLE for Exponential Hawkes Process
 
-Source code for [Maximum likelihood estimation for self-regulating Gaussian Hawkes process](https://arxiv.org/abs/2103.05299).
+Source code for [Maximum likelihood estimation for self-regulating Gaussian Hawkes process](https://authors.elsevier.com/c/1dbhNc8a~AzOW). 
 
 It includes a class to simulate an univariate Hawkes process and functions to compute the log-likelihood presented in the aforementioned paper along with the approximated version from Lemonnier's work [[1]](#1).
 
